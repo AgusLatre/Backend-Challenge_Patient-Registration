@@ -62,10 +62,10 @@ Revisá el correo en: http://localhost:8025
 
 ### 2. Registrar un paciente (vía curl)
 ```bash
-curl -X POST http://localhost:9000/api/patients/register \
+curl -X POST http://localhost:8000/api/patients/register \
   -H "Accept: application/json" \
-  -F "name=John Doe" \
-  -F "email=john@example.com" \
+  -F "name=Luciano Monteiro" \
+  -F "email=luciano@ligthit.com" \ 
   -F "phone=123456789" \
   -F "photo=@/ruta/a/una/imagen.jpg"
 ```
@@ -76,3 +76,38 @@ Esto debería:
 - Guardar el paciente en la base de datos
 
 - Enviar un correo de confirmación (capturado por MailHog)
+
+---
+
+## Escalabilidad: Envío de SMS
+
+Esta aplicación fue diseñada teniendo en cuenta la futura integración de notificaciones por SMS, por ejemplo, para confirmar el registro del paciente o enviar recordatorios.
+
+### Estructura preparada
+El sistema ya utiliza colas (queue) para correos, por lo que integrar el envío de SMS asíncrono será directo y no bloqueará el flujo principal.
+
+Se recomienda centralizar el envío de notificaciones (email y SMS) en una clase NotificationService o similar.
+
+### Pasos para escalar a SMS
+
+1. Crear una notificación genérica
+  - Usar Laravel Notifications 
+  ```bash 
+    php artisan make:notification PatientRegistered 
+  ```
+  - Implementar canales personalizados para mayor control.
+
+2. Instalar Twilio
+  ```bash
+    composer requiere twilio/sdk
+  ```
+
+5. Usar colas para SMS
+
+Asegurar que los mensajes se encolen igual que los mails:
+```php
+dispatch(new SendPatientSmsJob($patient));
+```
+
+### Aclaración
+Ya se incluyó el campo numero, para asi no perder información de los pacientes que se hayan inscripto antes de la implementación del envio de SMS.
