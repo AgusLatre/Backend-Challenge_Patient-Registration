@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PatientController;
+use App\Models\Patient;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/patients/register', [PatientController::class, 'store']);
+
+Route::get('/patients', function () {
+    return response()->json(Patient::all());
+});
