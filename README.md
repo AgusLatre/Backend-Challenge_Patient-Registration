@@ -1,4 +1,4 @@
-# Patient Registration API
+# Backend Challenge | Patient Registration API
 
 Aplicación Laravel para registrar pacientes, con validación, almacenamiento en PostgreSQL, y notificaciones por email simuladas vía MailHog.
 
@@ -45,6 +45,8 @@ docker exec -it backend-challenge_patient-registration-app-1 composer install
 docker exec -it backend-challenge_patient-registration-app-1 php artisan key:generate
 docker exec -it backend-challenge_patient-registration-app-1 php artisan migrate
 ```
+
+---
 
 ## Pruebas de funcionamiento
 
