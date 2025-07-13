@@ -12,7 +12,7 @@ Aplicación Laravel para registrar pacientes, con validación, almacenamiento en
 
 ---
 
-## 🚀 Instalación y ejecución
+## Instalación y ejecución
 
 ### 1. Clonar el repositorio
 
