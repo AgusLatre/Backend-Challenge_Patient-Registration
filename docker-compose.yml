@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/var/www
+    ports:
+      - 9000:9000
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: patient_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    networks:
+      - laravel
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+    networks:
+      - laravel
+
+networks:
+  laravel:
+
+volumes:
+  pgdata:
