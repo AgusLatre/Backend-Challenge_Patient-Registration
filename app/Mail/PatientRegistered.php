@@ -21,6 +21,9 @@ class PatientRegistered extends Mailable
     public function build()
     {
         return $this->subject('Registration Confirmation')
-                    ->view('emails.default');
+                    ->view('emails.register')
+                    ->with([
+                        'patient' => $this->patient,
+                    ]);
     }
 }
