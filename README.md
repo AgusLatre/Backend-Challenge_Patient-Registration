@@ -77,6 +77,13 @@ Esto debería:
 
 - Enviar un correo de confirmación (capturado por MailHog)
 
+## Un extra!
+
+La aplicación cuenta con un endpoint para poder ver un json con los datos de los pacientes registrados, pueden acceder al mismo con el siguiente comando.
+```bash
+curl http://localhost:8000/api/patients
+```
+
 ---
 
 ## Escalabilidad: Envío de SMS
